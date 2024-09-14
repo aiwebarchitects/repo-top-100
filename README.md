@@ -2,6 +2,8 @@
 
 Discover and explore the most popular and influential GitHub repositories of 2024 with our intuitive and feature-rich web application!
 
+![Repo Top 100](https://top-100-repos.on-fleek.app/Top-100-Best-GitHub-Repos.png)
+
 [![Follow us on X](https://img.shields.io/twitter/follow/aiwebarchitects?style=social)](https://x.com/aiwebarchitects)
 [![GitHub stars](https://img.shields.io/github/stars/aiwebarchitects/repo-top-100.svg?style=social&label=Star)](https://github.com/aiwebarchitects/repo-top-100)
 
