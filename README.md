@@ -5,6 +5,10 @@ Discover and explore the most popular and influential GitHub repositories of 202
 [![Follow us on X](https://img.shields.io/twitter/follow/aiwebarchitects?style=social)](https://x.com/aiwebarchitects)
 [![GitHub stars](https://img.shields.io/github/stars/aiwebarchitects/repo-top-100.svg?style=social&label=Star)](https://github.com/aiwebarchitects/repo-top-100)
 
+## 🎬 Demo
+
+Check out our [live demo](https://top-100-repos.on-fleek.app) to see the Top 100 Repos in action!
+
 ## 🌟 Features
 
 - **Dark Mode Toggle**: Switch between light and dark themes for comfortable viewing.
