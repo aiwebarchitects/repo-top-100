@@ -1,270 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Repo Top 100: Best GitHub Repos (2024)</title>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-    :root {
-        --primary-color: #6e48aa;
-        --secondary-color: #9d50bb;
-        --text-color: #333;
-        --bg-color: #f0f0f0;
-        --card-bg: #ffffff;
-        --hover-color: #8a2be2;
-    }
-
-    body {
-        font-family: 'Poppins', sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        background: linear-gradient(135deg, var(--bg-color), #e0e0e0);
-        min-height: 100vh;
-        transition: background-color 0.3s ease;
-    }
-
-    body.dark-mode {
-        --primary-color: #9d50bb;
-        --secondary-color: #6e48aa;
-        --text-color: #f0f0f0;
-        --bg-color: #1a1a1a;
-        --card-bg: #2a2a2a;
-        --hover-color: #b366cc;
-        background: linear-gradient(135deg, var(--bg-color), #2a2a2a);
-    }
-
-    h1 {
-        text-align: center;
-        color: var(--primary-color);
-        font-size: 2.5em;
-        margin-bottom: 30px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    }
-
-    #search-container {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    #search-input {
-        flex-grow: 1;
-        padding: 12px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 25px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-    }
-
-    #search-input:focus {
-        outline: none;
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    #filter-container {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 30px;
-        justify-content: center;
-    }
-
-    select {
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 20px;
-        background-color: var(--card-bg);
-        color: var(--text-color);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    select:hover, select:focus {
-        outline: none;
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    #repo-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 30px;
-    }
-
-    .repo-card {
-        background-color: var(--card-bg);
-        border-radius: 15px;
-        padding: 25px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-    }
-
-    .repo-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .repo-name {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 15px;
-        color: var(--primary-color);
-    }
-
-    .repo-description {
-        font-size: 14px;
-        color: #666;
-        margin-bottom: 20px;
-        flex-grow: 1;
-    }
-
-    .repo-stats {
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-        color: #888;
-        margin-top: 15px;
-    }
-
-    .repo-link {
-        display: inline-block;
-        margin-top: 15px;
-        padding: 8px 15px;
-        background-color: var(--primary-color);
-        color: white;
-        text-decoration: none;
-        border-radius: 20px;
-        transition: all 0.3s ease;
-        text-align: center;
-    }
-
-    .repo-link:hover {
-        background-color: var(--hover-color);
-        transform: translateY(-2px);
-    }
-
-    #loading {
-        text-align: center;
-        font-size: 18px;
-        margin-top: 50px;
-        color: var(--primary-color);
-    }
-
-    #load-more {
-        display: block;
-        margin: 30px auto;
-        padding: 12px 25px;
-        font-size: 16px;
-        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-        color: white;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    #load-more:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .stat-icon {
-        margin-right: 5px;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-
-    .repo-card:hover .repo-name {
-        animation: pulse 1s infinite;
-    }
-
-    .toggle-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 20px;
-    }
-
-    .toggle-dark-mode {
-        background-color: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .toggle-dark-mode:hover {
-        background-color: var(--hover-color);
-    }
-
-    .favorite-btn {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        font-size: 20px;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-
-    #random-repo {
-        display: block;
-        margin: 30px auto;
-        padding: 12px 25px;
-        font-size: 16px;
-        background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-        color: white;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    #random-repo:hover {
-        transform: translateY(-3px) rotate(5deg);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-    }
-</style>
+<title>Repo Top 100: Best GitHub Repositories for AI, Finance, and Productivity</title>
+<meta name="description" content="Discover the top 100 GitHub repositories for AI, Finance, Autonomous AI, and Productivity Software. Filter by topics like AutoGPT, LangChain, and more.">
+<meta name="keywords" content="GitHub, repositories, AI, Finance, Autonomous AI, Productivity Software, AutoGPT, BabyAGI, LangChain, open source">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="toggle-container">
-        <button class="toggle-dark-mode">Toggle Dark Mode</button>
+<div class="toggle-container">
+            <button class="toggle-dark-mode icon-button" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    <h1>Repo Top 100: Best GitHub Repos (<span id="current-year"></span>)</h1>
+    
+    <div class="social-buttons">
+        <a href="https://twitter.com/intent/tweet?text=Check%20out%20Repo%20Top%20100%3A%20Best%20GitHub%20Repositories&url=https%3A%2F%2Faiwebarchitects.github.io%2Frepo-top-100%2F" target="_blank" class="social-button twitter-button">
+            <i class="fab fa-twitter"></i> Tweet
+        </a>
+        <a href="https://github.com/aiwebarchitects/repo-top-100" target="_blank" class="social-button github-button">
+            <i class="fab fa-github"></i> View on GitHub
+        </a>
+        <a href="https://github.com/aiwebarchitects/repo-top-100/stargazers" target="_blank" class="social-button star-button">
+            <i class="fas fa-star"></i> Star
+        </a>
     </div>
-    <h1>Repo Top 100: Best GitHub Repos (2024)</h1>
+    
+    <div class="topic-tags">
+        <button class="topic-tag" data-topic="AI">AI</button>
+        <button class="topic-tag" data-topic="AI Prompts">AI Prompts</button>
+        <button class="topic-tag" data-topic="AI Jailbreaks">AI Jailbreaks</button>
+        <button class="topic-tag" data-topic="Autonomous AI">Autonomous AI</button>
+        <button class="topic-tag" data-topic="AutoGPT">AutoGPT</button>
+        <button class="topic-tag" data-topic="BabyAGI">BabyAGI</button>
+        <button class="topic-tag" data-topic="GPT Engineer">GPT Engineer</button>
+        <button class="topic-tag" data-topic="LangChain">LangChain</button>
+        <button class="topic-tag" data-topic="LLM Studio">LLM Studio</button>
+        <button class="topic-tag" data-topic="Finance">Finance</button>
+        <button class="topic-tag" data-topic="Productivity Software">Productivity Software</button>
+    </div>
     <div id="search-container">
         <input type="text" id="search-input" placeholder="Search repositories...">
     </div>
     <div id="filter-container">
-        <select id="language-filter">
-            <option value="">All Languages</option>
-        </select>
-        <select id="sort-filter">
-            <option value="stars">Stars</option>
-            <option value="forks">Forks</option>
-            <option value="updated">Last Updated</option>
-        </select>
-    </div>
-    <button id="random-repo">Surprise Me with a Random Repo!</button>
+            <select id="language-filter">
+                <option value="">All Languages</option>
+            </select>
+            <select id="sort-filter">
+                <option value="stars">Stars</option>
+                <option value="forks">Forks</option>
+                <option value="updated">Last Updated</option>
+            </select>
+        </div>
+        <button id="random-repo">
+            Surprise Me with a Random Repo!
+            <i class="fas fa-dice"></i>
+        </button>
     <div id="repo-list"></div>
     <div id="loading">Loading amazing repos...</div>
     <button id="load-more" style="display: none;">Discover More Gems</button>
+
+    <footer>
+        <p>Made with ❤️ by <a class="glink" href="https://github.com/aiwebarchitects">AI Web Architects</a></p>
+    </footer>
 
 <script>
 const repoList = document.getElementById('repo-list');
@@ -275,12 +77,18 @@ const loading = document.getElementById('loading');
 const loadMoreButton = document.getElementById('load-more');
 const darkModeToggle = document.querySelector('.toggle-dark-mode');
 const randomRepoButton = document.getElementById('random-repo');
+const topicTags = document.querySelectorAll('.topic-tag');
+const currentYearSpan = document.getElementById('current-year');
 
 let allRepos = [];
 let languages = new Set();
 let currentPage = 1;
 const perPage = 30;
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+let selectedTopic = '';
+
+// Set current year
+currentYearSpan.textContent = new Date().getFullYear();
 
 darkModeToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
@@ -295,7 +103,8 @@ if (localStorage.getItem('darkMode') === 'true') {
 async function fetchRepos(page = 1) {
     loading.style.display = 'block';
     try {
-        const response = await fetch(`https://api.github.com/search/repositories?q=stars:>1&sort=stars&order=desc&per_page=${perPage}&page=${page}`);
+        let url = `https://api.github.com/search/repositories?q=stars:>1${selectedTopic ? `+topic:${selectedTopic}` : ''}&sort=stars&order=desc&per_page=${perPage}&page=${page}`;
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error('GitHub API request failed');
         }
@@ -419,6 +228,20 @@ languageFilter.addEventListener('change', filterAndSortRepos);
 sortFilter.addEventListener('change', filterAndSortRepos);
 loadMoreButton.addEventListener('click', loadMoreRepos);
 randomRepoButton.addEventListener('click', showRandomRepo);
+
+// Add event listeners for topic tags
+topicTags.forEach(tag => {
+    tag.addEventListener('click', async () => {
+        topicTags.forEach(t => t.classList.remove('active'));
+        tag.classList.add('active');
+        selectedTopic = tag.dataset.topic;
+        currentPage = 1;
+        allRepos = await fetchRepos();
+        updateLanguages(allRepos);
+        displayRepos(allRepos);
+        loadMoreButton.style.display = 'block';
+    });
+});
 
 initializeApp();
 </script>
