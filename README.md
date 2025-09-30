@@ -1,4 +1,4 @@
-# Repo Top 100: Best GitHub Repos (2024) 🏆
+# Repo Top 100: Best GitHub Repos (2025) 🏆
 
 Discover and explore the most popular and influential GitHub repositories of 2024 with our intuitive and feature-rich web application!
 
